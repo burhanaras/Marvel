@@ -29,6 +29,16 @@ struct ProductDetailView: View {
 
 struct ProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductDetailView(viewModel: ProductDetailViewModel(networkLayer: DummyNetworkLayer(), productId: "1234"))
+        Group{
+            // Successful
+            ProductDetailView(viewModel: ProductDetailViewModel(networkLayer: DummyNetworkLayer(), productId: "1234"))
+            ProductDetailView(viewModel: ProductDetailViewModel(networkLayer: DummyNetworkLayer(), productId: "1234"))
+                .colorScheme(.dark)
+            
+            // Failing
+            ProductDetailView(viewModel: ProductDetailViewModel(networkLayer: DummyFailingNetworkLayer(), productId: "1234"))
+            ProductDetailView(viewModel: ProductDetailViewModel(networkLayer: DummyFailingNetworkLayer(), productId: "1234"))
+                .colorScheme(.dark)
+        }
     }
 }

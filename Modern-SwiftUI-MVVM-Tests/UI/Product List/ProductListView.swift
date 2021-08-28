@@ -68,14 +68,17 @@ struct ProductView: View{
 struct ProductListView_Previews: PreviewProvider {
     static var previews: some View {
         Group{
+            // Successful
             ProductListView(viewModel: ProductListViewModel(networkLayer: DummyNetworkLayer()))
             ProductListView(viewModel: ProductListViewModel(networkLayer: DummyNetworkLayer()))
                 .colorScheme(.dark)
             
+            // Failing: Network error
             ProductListView(viewModel: ProductListViewModel(networkLayer: DummyFailingNetworkLayer()))
             ProductListView(viewModel: ProductListViewModel(networkLayer: DummyFailingNetworkLayer()))
                 .colorScheme(.dark)
             
+            // Failing: Malformed URL
             ProductListView(viewModel: ProductListViewModel(networkLayer: DummyFailingMalformedUrlNetworkLayer()))
             ProductListView(viewModel: ProductListViewModel(networkLayer: DummyFailingMalformedUrlNetworkLayer()))
                 .colorScheme(.dark)
