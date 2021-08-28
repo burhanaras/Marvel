@@ -23,7 +23,11 @@ struct ProductDetailView: View {
     }
 
     func productDetail(_ product: Product) -> some View{
-        Text(product.title)
+        VStack {
+            Text(product.title)
+            Text(product.productGroupType)
+            Text(product.price)
+        }
     }
 }
 

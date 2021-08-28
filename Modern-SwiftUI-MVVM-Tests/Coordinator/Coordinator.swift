@@ -13,7 +13,7 @@ final class Coordinator{
     public static let shared = Coordinator()
     
     func navigateToProductDetail(productId: String) -> ProductDetailView{
-        let viewModel = ProductDetailViewModel(networkLayer: DummyNetworkLayer(), productId: productId)
+        let viewModel = ProductDetailViewModel(networkLayer: NetworkLayer(), productId: productId)
         return ProductDetailView(viewModel: viewModel)
     }
 }
