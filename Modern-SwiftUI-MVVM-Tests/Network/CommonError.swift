@@ -8,7 +8,7 @@
 import Foundation
 
 enum CommonError: Error{
-    case netwrokError
+    case networkError
     case configurationError
 }
 

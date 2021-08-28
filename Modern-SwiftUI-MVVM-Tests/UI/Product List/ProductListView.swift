@@ -18,7 +18,7 @@ struct ProductListView: View {
             switch viewModel.data{
             case let .success(products): ProductList(products: products)
             case let .failure(error):
-                Text("Fail")
+               ErrorView(error: error)
             case .none:
                 ProgressView()
             }
