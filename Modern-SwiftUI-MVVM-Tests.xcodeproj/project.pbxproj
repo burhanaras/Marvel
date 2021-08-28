@@ -16,6 +16,7 @@
 		9452B9A626DA612900135744 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9A526DA612900135744 /* Product.swift */; };
 		9452B9A826DA637700135744 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9A726DA637700135744 /* CommonError.swift */; };
 		9452B9AB26DA696400135744 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9AA26DA696400135744 /* ErrorView.swift */; };
+		9452B9AD26DA6A6400135744 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9AC26DA6A6400135744 /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		9452B9A526DA612900135744 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		9452B9A726DA637700135744 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		9452B9AA26DA696400135744 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		9452B9AC26DA6A6400135744 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				9452B9AA26DA696400135744 /* ErrorView.swift */,
+				9452B9AC26DA6A6400135744 /* LoadingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				9452B98E26DA5C2300135744 /* ContentView.swift in Sources */,
 				9452B9A626DA612900135744 /* Product.swift in Sources */,
 				9452B9AB26DA696400135744 /* ErrorView.swift in Sources */,
+				9452B9AD26DA6A6400135744 /* LoadingView.swift in Sources */,
 				9452B9A326DA609700135744 /* ProductListViewModel.swift in Sources */,
 				9452B98C26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift in Sources */,
 			);

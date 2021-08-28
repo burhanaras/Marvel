@@ -20,7 +20,7 @@ struct ProductListView: View {
             case let .failure(error):
                ErrorView(error: error)
             case .none:
-                ProgressView()
+               LoadingView()
             }
         }
         .navigationTitle("Products")
