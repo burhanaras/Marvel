@@ -22,7 +22,7 @@ struct ErrorView: View {
                 Image(systemName: "wifi.exclamationmark")
                     .font(.title)
                     .padding()
-                Text("Couldn't load data. Please check your connection")
+                Text("Couldn't load data. Please check your connection.")
             }
         }
         .padding()

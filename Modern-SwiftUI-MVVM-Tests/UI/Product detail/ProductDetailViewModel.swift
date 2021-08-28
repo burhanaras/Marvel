@@ -11,10 +11,11 @@ import Combine
 class ProductDetailViewModel: ObservableObject{
     @Published private(set) var data: Result<Product, CommonError>? = .none
     
-    private var networkLayer: INetworkLayer = DummyNetworkLayer()
+    private var networkLayer: INetworkLayer
     private var cancellables: Set<AnyCancellable> = []
     
-    init(productId: String) {
+    init(networkLayer: INetworkLayer, productId: String) {
+        self.networkLayer = networkLayer
         subscribe(productId: productId)
     }
     
