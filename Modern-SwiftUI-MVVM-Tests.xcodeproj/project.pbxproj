@@ -52,10 +52,10 @@
 		9452B98A26DA5C2300135744 /* Modern-SwiftUI-MVVM-Tests */ = {
 			isa = PBXGroup;
 			children = (
-				9452B98B26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift */,
-				9452B98D26DA5C2300135744 /* ContentView.swift */,
-				9452B98F26DA5C2400135744 /* Assets.xcassets */,
-				9452B99426DA5C2400135744 /* Info.plist */,
+				9452B99D26DA5E0700135744 /* App */,
+				9452B99C26DA5DEA00135744 /* Resources */,
+				9452B99B26DA5DDE00135744 /* UI */,
+				9452B99A26DA5DD600135744 /* Network */,
 				9452B99126DA5C2400135744 /* Preview Content */,
 			);
 			path = "Modern-SwiftUI-MVVM-Tests";
@@ -67,6 +67,38 @@
 				9452B99226DA5C2400135744 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9452B99A26DA5DD600135744 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		9452B99B26DA5DDE00135744 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9452B98D26DA5C2300135744 /* ContentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		9452B99C26DA5DEA00135744 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9452B98F26DA5C2400135744 /* Assets.xcassets */,
+				9452B99426DA5C2400135744 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9452B99D26DA5E0700135744 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				9452B98B26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
