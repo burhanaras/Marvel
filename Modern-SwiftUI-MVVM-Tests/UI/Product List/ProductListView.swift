@@ -68,8 +68,16 @@ struct ProductView: View{
 struct ProductListView_Previews: PreviewProvider {
     static var previews: some View {
         Group{
-            ProductListView(viewModel: ProductListViewModel())
-            ProductListView(viewModel: ProductListViewModel())
+            ProductListView(viewModel: ProductListViewModel(networkLayer: DummyNetworkLayer()))
+            ProductListView(viewModel: ProductListViewModel(networkLayer: DummyNetworkLayer()))
+                .colorScheme(.dark)
+            
+            ProductListView(viewModel: ProductListViewModel(networkLayer: DummyFailingNetworkLayer()))
+            ProductListView(viewModel: ProductListViewModel(networkLayer: DummyFailingNetworkLayer()))
+                .colorScheme(.dark)
+            
+            ProductListView(viewModel: ProductListViewModel(networkLayer: DummyFailingMalformedUrlNetworkLayer()))
+            ProductListView(viewModel: ProductListViewModel(networkLayer: DummyFailingMalformedUrlNetworkLayer()))
                 .colorScheme(.dark)
         }
     }

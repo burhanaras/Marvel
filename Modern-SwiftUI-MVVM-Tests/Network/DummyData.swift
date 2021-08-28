@@ -25,6 +25,10 @@ class DummyData{
             let dummyProduct = ProductDTO(productid: id, title: "Random Product \(id)", moneyprice: "\(Int.random(in: 1...25)).00 USD")
              dummyProducts.append(dummyProduct)
          }
-         return dummyProducts
+        return dummyProducts.sorted(by: {$0.productid < $1.productid})
      }
+    
+    static func productDTO(id: String) -> ProductDTO {
+        return ProductDTO(productid: Int(id)!, title: "Dummy Product with ID: \(id)", moneyprice: "\(Int.random(in: 1...25)).00 USD")
+    }
 }

@@ -12,19 +12,27 @@ class ProductListViewModel: ObservableObject{
     @Published private(set) var data: Result<[Product], CommonError>? = .none
     @Published private(set) var isPagingAvailable = false
     
-    private var networkLayer = DummyNetworkLayer()
+    private var networkLayer: INetworkLayer
     private var cancellables: Set<AnyCancellable> = []
     
     private var currentPage = 0
     private var pageLimit = 20
     private var currentData = [Product]()
     
-    init() {
+    init(networkLayer: INetworkLayer) {
+        self.networkLayer = networkLayer
         loadInitialPage()
     }
     
     func loadInitialPage(){
         subscribe(start: 0, number: pageLimit)
+    }
+    
+    func loadNextPage() {
+        //To show loading on UI, we have intentionally added 1 second delay here
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.subscribe(start: self.currentPage * self.pageLimit, number: self.pageLimit)
+        })
     }
 }
 
@@ -51,12 +59,5 @@ extension ProductListViewModel {
             })
             .store(in: &cancellables)
     }
-    
-    func loadNextPage() {
-        //To show loading on UI, we have intentionally added 1 second delay here
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.subscribe(start: self.currentPage * self.pageLimit, number: self.pageLimit)
-        })
 
-    }
 }

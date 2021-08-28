@@ -6,17 +6,32 @@
 //
 
 import Foundation
+import Combine
 
 class ProductDetailViewModel: ObservableObject{
     @Published private(set) var data: Result<Product, CommonError>? = .none
     
     private var networkLayer: INetworkLayer = DummyNetworkLayer()
+    private var cancellables: Set<AnyCancellable> = []
     
     init(productId: String) {
         subscribe(productId: productId)
     }
     
     private func subscribe(productId: String) {
-        data = .success(Product(id: productId, title: "Product with id: \(productId)", price: "15.00 $"))
+        networkLayer.getProductDetail(productId: productId)
+            .sink(receiveCompletion: {[weak self] completion in
+                switch completion{
+                case let .failure(error) where error == .malformedUrlError:
+                    self?.data = .failure(.configurationError)
+                case .finished:
+                    break
+                default:
+                    self?.data = .failure(.networkError)
+                }
+            }, receiveValue: { [weak self] productDTO in
+                self?.data = .success(Product.fromDTO(dto: productDTO))
+            })
+            .store(in: &cancellables)
     }
 }
