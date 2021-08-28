@@ -16,7 +16,7 @@ struct ProductListView: View {
     var body: some View {
         NavigationView{
             switch viewModel.data{
-            case let .success(products): ProductList(products: products)
+            case let .success(products): ProductList(viewModel: viewModel, products: products)
             case let .failure(error):
                ErrorView(error: error)
             case .none:
@@ -29,10 +29,22 @@ struct ProductListView: View {
 }
 
 struct ProductList: View{
+    @ObservedObject var viewModel: ProductListViewModel
     let products: [Product]
+    
     var body: some View{
-        List(products){ product in
-            ProductView(product: product)
+        List {
+            ForEach(products){ product in
+                ProductView(product: product)
+            }
+            
+            if viewModel.isPagingAvailable{
+                ProgressView()
+                    .onAppear{
+                        viewModel.loadNextPage()
+                    }
+            }
+            
         }
         .navigationTitle("Products")
     }
@@ -55,6 +67,10 @@ struct ProductView: View{
 
 struct ProductListView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductListView(viewModel: ProductListViewModel())
+        Group{
+            ProductListView(viewModel: ProductListViewModel())
+            ProductListView(viewModel: ProductListViewModel())
+                .colorScheme(.dark)
+        }
     }
 }
