@@ -17,6 +17,10 @@
 		9452B9A826DA637700135744 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9A726DA637700135744 /* CommonError.swift */; };
 		9452B9AB26DA696400135744 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9AA26DA696400135744 /* ErrorView.swift */; };
 		9452B9AD26DA6A6400135744 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9AC26DA6A6400135744 /* LoadingView.swift */; };
+		9452B9AF26DA712800135744 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9AE26DA712800135744 /* ProductDetailView.swift */; };
+		9452B9B126DA714000135744 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9B026DA714000135744 /* ProductDetailViewModel.swift */; };
+		9452B9B326DA762B00135744 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9B226DA762B00135744 /* Coordinator.swift */; };
+		9452B9B526DA7B0900135744 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9B426DA7B0800135744 /* DummyData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		9452B9A726DA637700135744 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 		9452B9AA26DA696400135744 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		9452B9AC26DA6A6400135744 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		9452B9AE26DA712800135744 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		9452B9B026DA714000135744 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
+		9452B9B226DA762B00135744 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		9452B9B426DA7B0800135744 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				9452B9A726DA637700135744 /* CommonError.swift */,
+				9452B9B426DA7B0800135744 /* DummyData.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -98,6 +107,7 @@
 				9452B99E26DA605800135744 /* Product List */,
 				9452B99F26DA606000135744 /* Product detail */,
 				9452B98D26DA5C2300135744 /* ContentView.swift */,
+				9452B9B226DA762B00135744 /* Coordinator.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -130,6 +140,8 @@
 		9452B99F26DA606000135744 /* Product detail */ = {
 			isa = PBXGroup;
 			children = (
+				9452B9AE26DA712800135744 /* ProductDetailView.swift */,
+				9452B9B026DA714000135744 /* ProductDetailViewModel.swift */,
 			);
 			path = "Product detail";
 			sourceTree = "<group>";
@@ -220,14 +232,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9452B9B526DA7B0900135744 /* DummyData.swift in Sources */,
 				9452B9A126DA608200135744 /* ProductListView.swift in Sources */,
 				9452B9A826DA637700135744 /* CommonError.swift in Sources */,
 				9452B98E26DA5C2300135744 /* ContentView.swift in Sources */,
+				9452B9B126DA714000135744 /* ProductDetailViewModel.swift in Sources */,
 				9452B9A626DA612900135744 /* Product.swift in Sources */,
 				9452B9AB26DA696400135744 /* ErrorView.swift in Sources */,
+				9452B9B326DA762B00135744 /* Coordinator.swift in Sources */,
 				9452B9AD26DA6A6400135744 /* LoadingView.swift in Sources */,
 				9452B9A326DA609700135744 /* ProductListViewModel.swift in Sources */,
 				9452B98C26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift in Sources */,
+				9452B9AF26DA712800135744 /* ProductDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

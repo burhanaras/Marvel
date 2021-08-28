@@ -54,7 +54,7 @@ struct ProductView: View{
     let product: Product
     var body: some View{
         NavigationLink(
-            destination: Text("Destination"),
+            destination: Coordinator.shared.navigateToProductDetail(productId: product.id),
             label: {
                 HStack{
                     Text(product.title)
