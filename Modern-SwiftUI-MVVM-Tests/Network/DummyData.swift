@@ -17,4 +17,14 @@ class DummyData{
         }
         return dummyProducts
     }
+    
+    static func productDTOs(count: Int) -> [ProductDTO]{
+         var dummyProducts = [ProductDTO]()
+         (0..<count).forEach{ index in
+            let id = Int.random(in: 0...1000)
+            let dummyProduct = ProductDTO(productid: id, title: "Random Product \(id)", moneyprice: "\(Int.random(in: 1...25)).00 USD")
+             dummyProducts.append(dummyProduct)
+         }
+         return dummyProducts
+     }
 }

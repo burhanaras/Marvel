@@ -12,3 +12,23 @@ struct Product: Identifiable{
     let title: String
     let price: String
 }
+
+extension Product{
+    static func fromDTO(dto: ProductDTO) -> Product{
+        return Product(id: "\(dto.productid)", title: dto.title, price: dto.moneyprice)
+    }
+}
+
+
+struct ProductsResponse: Encodable {
+    let totalcount: Int
+    let items: [ProductDTO]
+}
+
+
+struct ProductDTO: Encodable{
+    let productid: Int
+    let title: String
+    let moneyprice: String
+}
+

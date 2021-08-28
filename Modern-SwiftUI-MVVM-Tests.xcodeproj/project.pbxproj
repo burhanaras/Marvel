@@ -20,6 +20,7 @@
 		9452B9B126DA714000135744 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9B026DA714000135744 /* ProductDetailViewModel.swift */; };
 		9452B9B326DA762B00135744 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9B226DA762B00135744 /* Coordinator.swift */; };
 		9452B9B526DA7B0900135744 /* DummyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9B426DA7B0800135744 /* DummyData.swift */; };
+		9452B9B826DAC4B300135744 /* NetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9B726DAC4B300135744 /* NetworkLayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		9452B9B026DA714000135744 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		9452B9B226DA762B00135744 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		9452B9B426DA7B0800135744 /* DummyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyData.swift; sourceTree = "<group>"; };
+		9452B9B726DAC4B300135744 /* NetworkLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				9452B9A726DA637700135744 /* CommonError.swift */,
 				9452B9B426DA7B0800135744 /* DummyData.swift */,
+				9452B9B726DAC4B300135744 /* NetworkLayer.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9452B9B826DAC4B300135744 /* NetworkLayer.swift in Sources */,
 				9452B9B526DA7B0900135744 /* DummyData.swift in Sources */,
 				9452B9A126DA608200135744 /* ProductListView.swift in Sources */,
 				9452B9A826DA637700135744 /* CommonError.swift in Sources */,

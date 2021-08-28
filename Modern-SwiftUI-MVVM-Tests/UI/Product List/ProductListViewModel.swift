@@ -6,29 +6,56 @@
 //
 
 import Foundation
+import Combine
 
 class ProductListViewModel: ObservableObject{
     @Published private(set) var data: Result<[Product], CommonError>? = .none
     @Published private(set) var isPagingAvailable = false
     
+    private var networkLayer = DummyNetworkLayer()
+    private var cancellables: Set<AnyCancellable> = []
+    
+    private var currentPage = 0
+    private var pageLimit = 20
+    private var currentData = [Product]()
+    
     init() {
-        subscribe()
+        loadInitialPage()
+    }
+    
+    func loadInitialPage(){
+        subscribe(start: 0, number: pageLimit)
     }
 }
 
 extension ProductListViewModel {
-    private func subscribe() {
-        data = .success(DummyData.products())
-        guard let dataCount = try? self.data?.get().count else { return }
-        isPagingAvailable = dataCount < 50
+    
+    private func subscribe(start: Int, number: Int) {
+        networkLayer.getProducts(start: start, number: number)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion{
+                case let .failure(error) where error == .malformedUrlError:
+                    self?.data = .failure(.configurationError)
+                case .finished:
+                    break
+                default:
+                    self?.data = .failure(.networkError)
+                }
+            }, receiveValue: { [weak self] productsResponse in
+                self?.currentData += productsResponse.items.map{Product.fromDTO(dto: $0)}
+                if let currentData = self?.currentData{
+                    self?.data = .success(self?.currentData ?? [])
+                    self?.currentPage += 1
+                    self?.isPagingAvailable = currentData.count < productsResponse.totalcount
+                }
+            })
+            .store(in: &cancellables)
     }
     
     func loadNextPage() {
+        //To show loading on UI, we have intentionally added 1 second delay here
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            guard var newData = try? self.data?.get() else { return }
-            newData += DummyData.products()
-            self.data = .success(newData)
-            self.isPagingAvailable = newData.count < 50
+            self.subscribe(start: self.currentPage * self.pageLimit, number: self.pageLimit)
         })
 
     }
