@@ -14,6 +14,7 @@
 		9452B9A126DA608200135744 /* ProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9A026DA608200135744 /* ProductListView.swift */; };
 		9452B9A326DA609700135744 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9A226DA609700135744 /* ProductListViewModel.swift */; };
 		9452B9A626DA612900135744 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9A526DA612900135744 /* Product.swift */; };
+		9452B9A826DA637700135744 /* CommonError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9A726DA637700135744 /* CommonError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		9452B9A026DA608200135744 /* ProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListView.swift; sourceTree = "<group>"; };
 		9452B9A226DA609700135744 /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 		9452B9A526DA612900135744 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		9452B9A726DA637700135744 /* CommonError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		9452B99A26DA5DD600135744 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9452B9A726DA637700135744 /* CommonError.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9452B9A126DA608200135744 /* ProductListView.swift in Sources */,
+				9452B9A826DA637700135744 /* CommonError.swift in Sources */,
 				9452B98E26DA5C2300135744 /* ContentView.swift in Sources */,
 				9452B9A626DA612900135744 /* Product.swift in Sources */,
 				9452B9A326DA609700135744 /* ProductListViewModel.swift in Sources */,
