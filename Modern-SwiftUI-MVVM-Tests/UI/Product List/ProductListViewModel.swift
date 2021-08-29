@@ -29,6 +29,7 @@ class ProductListViewModel: ObservableObject{
     }
     
     func loadNextPage() {
+        guard isPagingAvailable else { return }
         self.subscribe(start: self.currentPage * self.pageLimit, number: self.pageLimit)
     }
 }
