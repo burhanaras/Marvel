@@ -18,6 +18,8 @@ class Unit_Tests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    
+//    MARK: - Mapping Tests for model and DTO classes.
     func test_mapping_from_productDTO_to_product_model(){
         // GIVEN: that we have a productDTO object
         let productDTO = ProductDTO(productid: 0, title: "Product0", moneyprice: "1 USD", productgrouptype: 10)
