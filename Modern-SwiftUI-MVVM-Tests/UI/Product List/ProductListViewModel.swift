@@ -29,10 +29,7 @@ class ProductListViewModel: ObservableObject{
     }
     
     func loadNextPage() {
-        //To show loading on UI, we have intentionally added 1 second delay here
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.subscribe(start: self.currentPage * self.pageLimit, number: self.pageLimit)
-        })
+        self.subscribe(start: self.currentPage * self.pageLimit, number: self.pageLimit)
     }
 }
 

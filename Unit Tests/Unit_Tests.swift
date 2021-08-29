@@ -9,15 +9,6 @@ import XCTest
 import Combine
 
 class Unit_Tests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     
 //    MARK: - Mapping Tests for model and DTO classes.
     func test_mapping_from_productDTO_to_product_model(){
@@ -58,6 +49,34 @@ class Unit_Tests: XCTestCase {
         XCTAssertEqual(viewModel.data, Result<[Product], CommonError>.failure(.networkError))
     }
     
+    func test_paging_should_work_correctly(){
+        // GIVEN: that we have a network layer and a ViewModel
+        let productsResponse = ProductsResponse(totalcount: 25, items: DummyData.productDTOs(count: 20))
+        let networkLayer = TestNetworkLayer(response: productsResponse, productDTO: testProductDTO0)
+        let viewModel = ProductListViewModel(networkLayer: networkLayer)
+        XCTAssertEqual(try viewModel.data?.get().count, 20)
+        
+        // WHEN: loadNextPage() is triggered
+        viewModel.loadNextPage()
+        
+        // THEN: viewModel's data should contain second page also.
+        XCTAssertEqual(try viewModel.data?.get().count, 40)
+    }
+    
+    func test_paging_should_not_try_to_fetch_more_if_no_more_page_is_available(){
+        // GIVEN: that we have a network layer and a ViewModel
+        let productsResponse = ProductsResponse(totalcount: 25, items: DummyData.productDTOs(count: 20))
+        let networkLayer = TestNetworkLayer(response: productsResponse, productDTO: testProductDTO0)
+        let viewModel = ProductListViewModel(networkLayer: networkLayer)
+        XCTAssertEqual(try viewModel.data?.get().count, 20)
+        
+        // WHEN: loadNextPage() is triggered twice
+        viewModel.loadNextPage()
+        viewModel.loadNextPage()
+        
+        // THEN: viewModel's data should contain the first and second page. NOT the third one
+        XCTAssertEqual(try viewModel.data?.get().count, 40)
+    }
     
 //    MARK: - ProductDetail Tests
     func test_ProductDetailViewModel_returns_correct_data() throws {
@@ -90,6 +109,7 @@ class Unit_Tests: XCTestCase {
         // This is an example of a performance test case.
         measure {
             // Put the code you want to measure the time of here.
+            try? test_ProductListViewModel_returns_correct_data()
         }
     }
 
