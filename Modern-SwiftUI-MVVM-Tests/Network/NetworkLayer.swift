@@ -30,6 +30,12 @@ class NetworkLayer: INetworkLayer{
         return publisher.eraseToAnyPublisher()
     }
     
+    func getProductDetailImage(productId: String) -> AnyPublisher<String, RequestError> {
+        let url = URL(string: Self.baseUrl.appendingPathComponent("/products/\(productId)/images.json?num=1"))
+        let publisher: AnyPublisher<String, RequestError> = fetch(url: url)
+        return publisher.eraseToAnyPublisher()
+    }
+    
     private func fetch<NetworkModel: Codable>(url: URL?) -> AnyPublisher<NetworkModel, RequestError>{
         guard let url = url else{
             return Result<NetworkModel, RequestError>

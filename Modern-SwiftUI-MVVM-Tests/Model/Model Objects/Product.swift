@@ -21,18 +21,3 @@ extension Product{
         return product
     }
 }
-
-
-struct ProductsResponse: Codable {
-    let totalcount: Int
-    let items: [ProductDTO]
-}
-
-
-struct ProductDTO: Codable{
-    let productid: Int
-    let title: String
-    let moneyprice: String
-    var productgrouptype: Int?
-}
-
