@@ -10,16 +10,18 @@ import Combine
 
 class ProductDetailViewModel: ObservableObject{
     @Published private(set) var data: Result<Product, CommonError>? = .none
+    @Published private(set) var productImage: URL = URL(string: "https://via.placeholder.com/300.png/09f/fff")!
     
     private var networkLayer: INetworkLayer
     private var cancellables: Set<AnyCancellable> = []
     
     init(networkLayer: INetworkLayer, productId: String) {
         self.networkLayer = networkLayer
-        subscribe(productId: productId)
+        subscribeToProductDetail(productId: productId)
+        subscribeToProductImage(productId: productId)
     }
     
-    private func subscribe(productId: String) {
+    private func subscribeToProductDetail(productId: String) {
         networkLayer.getProductDetail(productId: productId)
             .sink(receiveCompletion: {[weak self] completion in
                 switch completion{
@@ -34,5 +36,9 @@ class ProductDetailViewModel: ObservableObject{
                 self?.data = .success(Product.fromDTO(dto: productDTO))
             })
             .store(in: &cancellables)
+    }
+    
+    private func subscribeToProductImage(productId: String){
+        productImage = URL(string: "https://image.tmdb.org/t/p/original//pThyQovXQrw2m0s9x82twj48Jq4.jpg")!
     }
 }

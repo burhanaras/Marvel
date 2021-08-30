@@ -24,6 +24,11 @@ struct ProductDetailView: View {
 
     func productDetail(_ product: Product) -> some View{
         VStack {
+            AsyncImage(
+                url: viewModel.productImage,
+                placeholder: { ProgressView() },
+                image: { Image(uiImage: $0).resizable() }
+            )
             Text(product.title)
             Text(product.productGroupType)
             Text(product.price)

@@ -40,7 +40,6 @@ class NetworkLayer: INetworkLayer{
         var request = URLRequest(url: url,timeoutInterval: Double.infinity)
         request.addValue("Basic OTAzMTYtMTI1OnBmWDBZN0EyVFlBbFo1NzFJS0VPN0FLb1h6YTZZbHZzUDhrS3ZBdTM=", forHTTPHeaderField: "Authorization")
         request.httpMethod = "GET"
-        print(request)
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .retry(3)
