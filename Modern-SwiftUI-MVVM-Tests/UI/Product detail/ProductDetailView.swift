@@ -20,6 +20,9 @@ struct ProductDetailView: View {
                LoadingView()
             }
         }
+        .onAppear{
+            viewModel.loadProductDetail()
+        }
     }
 
     func productDetail(_ product: Product) -> some View{

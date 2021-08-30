@@ -37,6 +37,7 @@ class ImageLoader: ObservableObject {
         }
         
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
+            .timeout(5, scheduler: DispatchQueue.main)
             .map { UIImage(data: $0.data) }
             .replaceError(with: UIImage(named: "Placeholder"))
             .handleEvents(receiveSubscription: { [weak self] _ in self?.onStart() },

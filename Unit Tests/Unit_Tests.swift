@@ -84,8 +84,9 @@ class Unit_Tests: XCTestCase {
         let productDTO = ProductDTO(productid: 1453, title: "My lovely product", moneyprice: "1 USD", productgrouptype: 10)
         let networkLayer = TestNetworkLayer(response: dummyProductsResponse, productDTO: productDTO)
         
-        // WHEN: ProductDetailviewModel is initialized with a productID
+        // WHEN: ProductDetailviewModel's loadProductDetail() is called
         let viewModel = ProductDetailViewModel(networkLayer: networkLayer, productId: String(productDTO.productid))
+        viewModel.loadProductDetail()
         
         // THEN: ViewModel's data should be same
         XCTAssertEqual(try viewModel.data?.get().id, String(productDTO.productid))
@@ -98,8 +99,9 @@ class Unit_Tests: XCTestCase {
         // GIVEN: that we have a NetworkLayer that fails
         let networkLayer = TestFailingNetworkLayer()
         
-        // WHEN: ProductListViewModel is initialized
+        // WHEN: ProductListViewModel's loadProductDetail() is called
         let viewModel = ProductDetailViewModel(networkLayer: networkLayer, productId: "123")
+        viewModel.loadProductDetail()
         
         // THEN: ViewModel's data should be .failure()
         XCTAssertEqual(viewModel.data, Result<Product, CommonError>.failure(.networkError))

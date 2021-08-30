@@ -14,11 +14,17 @@ class ProductDetailViewModel: ObservableObject{
     
     private var networkLayer: INetworkLayer
     private var cancellables: Set<AnyCancellable> = []
+    private var productID: String
     
     init(networkLayer: INetworkLayer, productId: String) {
         self.networkLayer = networkLayer
-        subscribeToProductDetail(productId: productId)
-        subscribeToProductImage(productId: productId)
+        self.productID = productId
+
+    }
+    
+    func loadProductDetail(){
+        subscribeToProductDetail(productId: productID)
+        subscribeToProductImage(productId: productID)
     }
     
     private func subscribeToProductDetail(productId: String) {
@@ -38,9 +44,7 @@ class ProductDetailViewModel: ObservableObject{
             .store(in: &cancellables)
     }
     
-    private func subscribeToProductImage(productId: String){
-//        productImage = URL(string: "https://image.tmdb.org/t/p/original//pThyQovXQrw2m0s9x82twj48Jq4.jpg")!
-        
+    private func subscribeToProductImage(productId: String){        
         networkLayer.getProductDetailImage(productId: productId)
             .sink(receiveCompletion: {[weak self] completion in
                 switch completion{
@@ -56,8 +60,10 @@ class ProductDetailViewModel: ObservableObject{
                     self?.productImage = URL(string: defaultImageURL)!
                     return
                 }
-                if let image =  URL(string: productImagesResponse.items[0].resourceid) {
+                let imageURL = (self?.networkLayer.baseURL)!  as String + "/" + productImagesResponse.items[0].resourceid
+                if let image =  URL(string: imageURL) {
                     self?.productImage = image
+                    print("Image url is \(imageURL)")
                 } else {
                     self?.productImage = URL(string: defaultImageURL)!
                 }
