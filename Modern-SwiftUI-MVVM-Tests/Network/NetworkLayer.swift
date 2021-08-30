@@ -9,30 +9,31 @@ import Foundation
 import Combine
 
 protocol INetworkLayer {
+    var baseURL: NSString { get }
     func getProducts(start: Int, number: Int) -> AnyPublisher<ProductsResponse, RequestError>
     func getProductDetail(productId: String) -> AnyPublisher<ProductDTO, RequestError>
+    func getProductDetailImage(productId: String) -> AnyPublisher<ProductImagesResponse, RequestError>
 }
 
 class NetworkLayer: INetworkLayer{
-    
-    private static let baseUrl = "https://api-sandbox.mysitoo.com/v2/accounts/90316/sites/1" as NSString
+    var baseURL: NSString { return "https://api-sandbox.mysitoo.com/v2/accounts/90316/sites/1" as NSString }
     private let decoder = JSONDecoder()
     
     func getProducts(start: Int, number: Int) -> AnyPublisher<ProductsResponse, RequestError> {
-        let url = URL(string: Self.baseUrl.appendingPathComponent("/products.json?start=\(start)&num=\(number)&fields=productid,title,moneyprice") as String)
+        let url = URL(string: baseURL.appendingPathComponent("/products.json?start=\(start)&num=\(number)&fields=productid,title,moneyprice") as String)
         let publisher: AnyPublisher<ProductsResponse, RequestError> = fetch(url: url)
         return publisher.eraseToAnyPublisher()
     }
     
     func getProductDetail(productId: String) -> AnyPublisher<ProductDTO, RequestError> {
-        let url = URL(string: Self.baseUrl.appendingPathComponent("/products/\(productId).json"))
+        let url = URL(string: baseURL.appendingPathComponent("/products/\(productId).json"))
         let publisher: AnyPublisher<ProductDTO, RequestError> = fetch(url: url)
         return publisher.eraseToAnyPublisher()
     }
     
-    func getProductDetailImage(productId: String) -> AnyPublisher<String, RequestError> {
-        let url = URL(string: Self.baseUrl.appendingPathComponent("/products/\(productId)/images.json?num=1"))
-        let publisher: AnyPublisher<String, RequestError> = fetch(url: url)
+    func getProductDetailImage(productId: String) -> AnyPublisher<ProductImagesResponse, RequestError> {
+        let url = URL(string: baseURL.appendingPathComponent("/products/\(productId)/images.json?num=1"))
+        let publisher: AnyPublisher<ProductImagesResponse, RequestError> = fetch(url: url)
         return publisher.eraseToAnyPublisher()
     }
     
@@ -60,6 +61,7 @@ class NetworkLayer: INetworkLayer{
 
 // MARK: - Network Layer To Return Dummy Data
 class DummyNetworkLayer: INetworkLayer {
+    var baseURL: NSString { return "https://api-sandbox.mysitoo.com/v2/accounts/90316/sites/1" as NSString }
     
     func getProducts(start: Int, number: Int) -> AnyPublisher<ProductsResponse, RequestError> {
         return Result<ProductsResponse, RequestError>
@@ -71,10 +73,17 @@ class DummyNetworkLayer: INetworkLayer {
             .Publisher(.success(DummyData.productDTO(id: productId)))
             .eraseToAnyPublisher()
     }
+    
+    func getProductDetailImage(productId: String) -> AnyPublisher<ProductImagesResponse, RequestError> {
+        return Result<ProductImagesResponse, RequestError>
+            .Publisher(.failure(.networkError))
+            .eraseToAnyPublisher()
+    }
 }
 
 // MARK: - Network Layer To Fail
 class DummyFailingNetworkLayer: INetworkLayer{
+    var baseURL: NSString { return "https://api-sandbox.mysitoo.com/v2/accounts/90316/sites/1" as NSString }
     
     func getProducts(start: Int, number: Int) -> AnyPublisher<ProductsResponse, RequestError> {
         return Result<ProductsResponse, RequestError>
@@ -84,12 +93,19 @@ class DummyFailingNetworkLayer: INetworkLayer{
     
     func getProductDetail(productId: String) -> AnyPublisher<ProductDTO, RequestError> {
         return Result<ProductDTO, RequestError>
+            .Publisher(.failure(.networkError))
+            .eraseToAnyPublisher()
+    }
+    
+    func getProductDetailImage(productId: String) -> AnyPublisher<ProductImagesResponse, RequestError> {
+        return Result<ProductImagesResponse, RequestError>
             .Publisher(.failure(.networkError))
             .eraseToAnyPublisher()
     }
 }
 
 class DummyFailingMalformedUrlNetworkLayer: INetworkLayer{
+    var baseURL: NSString { return "https://api-sandbox.mysitoo.com/v2/accounts/90316/sites/1" as NSString }
     
     func getProducts(start: Int, number: Int) -> AnyPublisher<ProductsResponse, RequestError> {
         return Result<ProductsResponse, RequestError>
@@ -100,6 +116,12 @@ class DummyFailingMalformedUrlNetworkLayer: INetworkLayer{
     func getProductDetail(productId: String) -> AnyPublisher<ProductDTO, RequestError> {
         return Result<ProductDTO, RequestError>
             .Publisher(.failure(.malformedUrlError))
+            .eraseToAnyPublisher()
+    }
+    
+    func getProductDetailImage(productId: String) -> AnyPublisher<ProductImagesResponse, RequestError> {
+        return Result<ProductImagesResponse, RequestError>
+            .Publisher(.failure(.networkError))
             .eraseToAnyPublisher()
     }
 }

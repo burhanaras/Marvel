@@ -110,6 +110,8 @@ class Unit_Tests: XCTestCase {
 
 // MARK: - NetworkLayer's to be used in tests. One returns data, other one fails.
 class TestNetworkLayer: INetworkLayer {
+    var baseURL: NSString { return "" as NSString }
+    
     private var response: ProductsResponse
     private var productDTO: ProductDTO
     
@@ -128,9 +130,15 @@ class TestNetworkLayer: INetworkLayer {
             .Publisher(.success(productDTO))
             .eraseToAnyPublisher()
     }
+    func getProductDetailImage(productId: String) -> AnyPublisher<ProductImagesResponse, RequestError> {
+        return Result<ProductImagesResponse, RequestError>
+            .Publisher(.success(testProductImageResponse))
+            .eraseToAnyPublisher()
+    }
 }
 
 class TestFailingNetworkLayer: INetworkLayer {
+    var baseURL: NSString { return "" as NSString }
     
     func getProducts(start: Int, number: Int) -> AnyPublisher<ProductsResponse, RequestError> {
         return Result<ProductsResponse, RequestError>
@@ -139,6 +147,11 @@ class TestFailingNetworkLayer: INetworkLayer {
     }
     func getProductDetail(productId: String) -> AnyPublisher<ProductDTO, RequestError> {
         return Result<ProductDTO, RequestError>
+            .Publisher(.failure(.networkError))
+            .eraseToAnyPublisher()
+    }
+    func getProductDetailImage(productId: String) -> AnyPublisher<ProductImagesResponse, RequestError> {
+        return Result<ProductImagesResponse, RequestError>
             .Publisher(.failure(.networkError))
             .eraseToAnyPublisher()
     }
@@ -154,3 +167,4 @@ let testProductDTO4 = ProductDTO(productid: 4, title: "Product4", moneyprice: "5
 
 let testProducts = [testProductDTO0, testProductDTO1, testProductDTO2, testProductDTO3, testProductDTO4]
 let testProductsResponse = ProductsResponse(totalcount: 12, items: testProducts)
+let testProductImageResponse = ProductImagesResponse(totalcount: 1, items: [ProductImageDTO(resourceid: "123.jpg")])

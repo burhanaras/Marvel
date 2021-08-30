@@ -29,6 +29,7 @@ struct ProductDetailView: View {
                 placeholder: { ProgressView() },
                 image: { Image(uiImage: $0).resizable() }
             )
+            .frame(width: 40, height: 40, alignment: .center)
             Text(product.title)
             Text(product.productGroupType)
             Text(product.price)

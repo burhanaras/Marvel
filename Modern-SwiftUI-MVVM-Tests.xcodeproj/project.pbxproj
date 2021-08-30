@@ -33,9 +33,9 @@
 		9452B9D526DD613200135744 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9D426DD613200135744 /* ImageCache.swift */; };
 		9452B9D726DD615A00135744 /* EnvironmentValues+ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9D626DD615A00135744 /* EnvironmentValues+ImageCache.swift */; };
 		9452B9D926DD652400135744 /* ProductImagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9D826DD652400135744 /* ProductImagesResponse.swift */; };
-		9452B9DA26DD652400135744 /* ProductImagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9D826DD652400135744 /* ProductImagesResponse.swift */; };
 		9452B9DC26DD658300135744 /* ProductsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9DB26DD658300135744 /* ProductsResponse.swift */; };
-		9452B9DD26DD658300135744 /* ProductsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9DB26DD658300135744 /* ProductsResponse.swift */; };
+		9452B9E226DD6FDC00135744 /* ProductImagesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9D826DD652400135744 /* ProductImagesResponse.swift */; };
+		9452B9E326DD6FE000135744 /* ProductsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B9DB26DD658300135744 /* ProductsResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -397,10 +397,10 @@
 				9452B9C726DAEFD000135744 /* ProductListViewModel.swift in Sources */,
 				9452B9C026DAEF9500135744 /* Unit_Tests.swift in Sources */,
 				9452B9C826DAEFD400135744 /* ProductDetailViewModel.swift in Sources */,
-				9452B9DA26DD652400135744 /* ProductImagesResponse.swift in Sources */,
 				9452B9CA26DAEFE200135744 /* DummyData.swift in Sources */,
 				9452B9C926DAEFDF00135744 /* CommonError.swift in Sources */,
-				9452B9DD26DD658300135744 /* ProductsResponse.swift in Sources */,
+				9452B9E226DD6FDC00135744 /* ProductImagesResponse.swift in Sources */,
+				9452B9E326DD6FE000135744 /* ProductsResponse.swift in Sources */,
 				9452B9CC26DAEFE900135744 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

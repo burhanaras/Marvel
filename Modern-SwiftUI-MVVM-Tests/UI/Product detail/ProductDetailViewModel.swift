@@ -10,7 +10,7 @@ import Combine
 
 class ProductDetailViewModel: ObservableObject{
     @Published private(set) var data: Result<Product, CommonError>? = .none
-    @Published private(set) var productImage: URL = URL(string: "https://via.placeholder.com/300.png/09f/fff")!
+    @Published private(set) var productImage: URL = URL(string: defaultImageURL)!
     
     private var networkLayer: INetworkLayer
     private var cancellables: Set<AnyCancellable> = []
@@ -39,6 +39,31 @@ class ProductDetailViewModel: ObservableObject{
     }
     
     private func subscribeToProductImage(productId: String){
-        productImage = URL(string: "https://image.tmdb.org/t/p/original//pThyQovXQrw2m0s9x82twj48Jq4.jpg")!
+//        productImage = URL(string: "https://image.tmdb.org/t/p/original//pThyQovXQrw2m0s9x82twj48Jq4.jpg")!
+        
+        networkLayer.getProductDetailImage(productId: productId)
+            .sink(receiveCompletion: {[weak self] completion in
+                switch completion{
+                case let .failure(error) where error == .malformedUrlError:
+                    self?.productImage = URL(string: defaultImageURL)!
+                case .finished:
+                    break
+                default:
+                    self?.productImage = URL(string: defaultImageURL)!
+                }
+            }, receiveValue: { [weak self] productImagesResponse in
+                guard productImagesResponse.items.count > 0 else {
+                    self?.productImage = URL(string: defaultImageURL)!
+                    return
+                }
+                if let image =  URL(string: productImagesResponse.items[0].resourceid) {
+                    self?.productImage = image
+                } else {
+                    self?.productImage = URL(string: defaultImageURL)!
+                }
+            })
+            .store(in: &cancellables)
     }
 }
+
+var defaultImageURL = "https://via.placeholder.com/300.png"
