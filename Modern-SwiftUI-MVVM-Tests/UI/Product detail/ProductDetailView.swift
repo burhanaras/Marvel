@@ -33,10 +33,14 @@ struct ProductDetailView: View {
                 image: { Image(uiImage: $0).resizable() }
             )
             .frame(width: 40, height: 40, alignment: .center)
-            Text(product.title)
-            Text(product.productGroupType)
-            Text(product.price)
+            .padding()
+            
+            Text(product.title) .font(.title)
+            Text(product.productGroupType).font(.body)
+            Text(product.price).font(.body)
+            Spacer()
         }
+        .padding()
     }
 }
 
