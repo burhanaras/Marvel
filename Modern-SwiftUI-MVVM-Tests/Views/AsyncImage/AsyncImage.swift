@@ -30,10 +30,10 @@ struct AsyncImage<Placeholder: View>: View {
     
     private var content: some View {
         Group {
-            if loader.image != nil {
-                image(loader.image!)
-            } else {
-                placeholder
+            switch loader.status{
+            case .loading: placeholder
+            case .success: image(loader.image!)
+            case .timeout: image(UIImage(named: "Placeholder")!)
             }
         }
     }

@@ -8,14 +8,20 @@
 import Combine
 import UIKit
 
+enum ImageLoaderStatus{
+    case loading
+    case success
+    case timeout
+}
+
 class ImageLoader: ObservableObject {
     @Published var image: UIImage?
-    
-    private(set) var isLoading = false
+    @Published private(set) var status: ImageLoaderStatus = .loading
     
     private let url: URL
     private var cache: ImageCache?
     private var cancellable: AnyCancellable?
+    private(set) var isLoading = false
     
     private static let imageProcessingQueue = DispatchQueue(label: "image-processing")
     
@@ -36,8 +42,14 @@ class ImageLoader: ObservableObject {
             return
         }
         
+        // Timeout is 2 secs.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+            self.status = .timeout
+            self.cancel()
+            return
+        })
+        
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
-            .timeout(5, scheduler: DispatchQueue.main)
             .map { UIImage(data: $0.data) }
             .replaceError(with: UIImage(named: "Placeholder"))
             .handleEvents(receiveSubscription: { [weak self] _ in self?.onStart() },
