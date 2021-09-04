@@ -32,12 +32,9 @@ struct MarvelList: View{
     @ObservedObject var viewModel: MarvelListViewModel
     let heroes: [Marvel]
     
-    private var isTwoColumn: Bool {
-        return UIDevice.current.model == "iPad"
-    }
     let columns = [
         GridItem(.adaptive(minimum: UIDevice.current.model == "iPad" ? 240 : 120))
-       ]
+    ]
     
     var body: some View{
         ScrollView(.vertical) {
