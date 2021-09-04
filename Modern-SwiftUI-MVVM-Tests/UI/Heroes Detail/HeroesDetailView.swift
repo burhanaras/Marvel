@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct ProductDetailView: View {
-    @ObservedObject var viewModel: ProductDetailViewModel
+struct HeroesDetailView: View {
+    @ObservedObject var viewModel: HeroesDetailViewModel
     
     var body: some View {
         VStack {
             switch viewModel.data{
-            case let .success(product): productDetail(product)
+            case let .success(product): heroesDetail(product)
             case let .failure(error):
                ErrorView(error: error)
             case .none:
@@ -25,7 +25,7 @@ struct ProductDetailView: View {
         }
     }
 
-    func productDetail(_ product: Product) -> some View{
+    func heroesDetail(_ hero: Hero) -> some View{
         VStack {
             AsyncImage(
                 url: viewModel.productImage,
@@ -35,9 +35,9 @@ struct ProductDetailView: View {
             .frame(width: 40, height: 40, alignment: .center)
             .padding()
             
-            Text(product.title) .font(.title)
-            Text(product.productGroupType).font(.body)
-            Text(product.price).font(.body)
+            Text(hero.title) .font(.title)
+            Text(hero.productGroupType).font(.body)
+            Text(hero.price).font(.body)
             Spacer()
         }
         .padding()
@@ -48,13 +48,13 @@ struct ProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
         Group{
             // Successful
-            ProductDetailView(viewModel: ProductDetailViewModel(networkLayer: DummyNetworkLayer(), productId: "1234"))
-            ProductDetailView(viewModel: ProductDetailViewModel(networkLayer: DummyNetworkLayer(), productId: "1234"))
+            HeroesDetailView(viewModel: HeroesDetailViewModel(networkLayer: DummyNetworkLayer(), productId: "1234"))
+            HeroesDetailView(viewModel: HeroesDetailViewModel(networkLayer: DummyNetworkLayer(), productId: "1234"))
                 .colorScheme(.dark)
             
             // Failing
-            ProductDetailView(viewModel: ProductDetailViewModel(networkLayer: DummyFailingNetworkLayer(), productId: "1234"))
-            ProductDetailView(viewModel: ProductDetailViewModel(networkLayer: DummyFailingNetworkLayer(), productId: "1234"))
+            HeroesDetailView(viewModel: HeroesDetailViewModel(networkLayer: DummyFailingNetworkLayer(), productId: "1234"))
+            HeroesDetailView(viewModel: HeroesDetailViewModel(networkLayer: DummyFailingNetworkLayer(), productId: "1234"))
                 .colorScheme(.dark)
         }
     }

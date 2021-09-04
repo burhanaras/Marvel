@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-class ProductDetailViewModel: ObservableObject{
-    @Published private(set) var data: Result<Product, CommonError>? = .none
+class HeroesDetailViewModel: ObservableObject{
+    @Published private(set) var data: Result<Hero, CommonError>? = .none
     @Published private(set) var productImage: URL = URL(string: defaultImageURL)!
     
     private var networkLayer: INetworkLayer
@@ -39,7 +39,7 @@ class ProductDetailViewModel: ObservableObject{
                     self?.data = .failure(.networkError)
                 }
             }, receiveValue: { [weak self] productDTO in
-                self?.data = .success(Product.fromDTO(dto: productDTO))
+                self?.data = .success(Hero.fromDTO(dto: productDTO))
             })
             .store(in: &cancellables)
     }

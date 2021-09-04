@@ -11,7 +11,7 @@ import SwiftUI
 struct Modern_SwiftUI_MVVM_TestsApp: App {
     var body: some Scene {
         WindowGroup {
-           ProductListView(viewModel: ProductListViewModel(networkLayer: NetworkLayer()))
+           HeroesListView(viewModel: HeroesListViewModel(networkLayer: NetworkLayer()))
         }
     }
 }

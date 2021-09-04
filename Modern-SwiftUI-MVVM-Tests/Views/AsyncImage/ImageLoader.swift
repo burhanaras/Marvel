@@ -42,12 +42,12 @@ class ImageLoader: ObservableObject {
             return
         }
         
-        // Timeout is 2 secs.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-            self.status = .timeout
-            self.cancel()
-            return
-        })
+//        // Timeout is 2 secs.
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+//            self.status = .timeout
+//            self.cancel()
+//            return
+//        })
         
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
             .map { UIImage(data: $0.data) }

@@ -8,16 +8,16 @@
 import Foundation
 import Combine
 
-class ProductListViewModel: ObservableObject{
-    @Published private(set) var data: Result<[Product], CommonError>? = .none
+class HeroesListViewModel: ObservableObject{
+    @Published private(set) var data: Result<[Hero], CommonError>? = .none
     @Published private(set) var isPagingAvailable = false
     
     private var networkLayer: INetworkLayer
     private var cancellables: Set<AnyCancellable> = []
     
     private var currentPage = 0
-    private var pageLimit = 20
-    private var currentData = [Product]()
+    private var pageLimit = 30
+    private var currentData = [Hero]()
     
     init(networkLayer: INetworkLayer) {
         self.networkLayer = networkLayer
@@ -34,7 +34,7 @@ class ProductListViewModel: ObservableObject{
     }
 }
 
-extension ProductListViewModel {
+extension HeroesListViewModel {
     
     private func subscribe(start: Int, number: Int) {
         networkLayer.getProducts(start: start, number: number)
@@ -48,7 +48,7 @@ extension ProductListViewModel {
                     self?.data = .failure(.networkError)
                 }
             }, receiveValue: { [weak self] productsResponse in
-                self?.currentData += productsResponse.items.map{Product.fromDTO(dto: $0)}
+                self?.currentData += productsResponse.items.map{Hero.fromDTO(dto: $0)}
                 if let currentData = self?.currentData{
                     self?.data = .success(self?.currentData ?? [])
                     self?.currentPage += 1

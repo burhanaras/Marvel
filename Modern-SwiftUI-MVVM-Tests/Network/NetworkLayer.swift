@@ -127,5 +127,5 @@ class DummyFailingMalformedUrlNetworkLayer: INetworkLayer{
 }
 
 
-var dummyProduct = Product(id: UUID().uuidString, title: "Slm", price: "12")
+var dummyProduct = Hero(id: UUID().uuidString, title: "Slm", price: "12")
 var dummyProductsResponse = ProductsResponse(totalcount: 33, items: DummyData.productDTOs(count: 20))

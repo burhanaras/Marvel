@@ -9,10 +9,10 @@ import Foundation
 
 class DummyData{
     
-   static func products() -> [Product]{
-        var dummyProducts = [Product]()
+   static func products() -> [Hero]{
+        var dummyProducts = [Hero]()
         (0...20).forEach{ index in
-            let dummyProduct = Product(id: UUID().uuidString, title: "Product \(index)", price: "15.00 USD")
+            let dummyProduct = Hero(id: UUID().uuidString, title: "Product \(index)", price: "15.00 USD")
             dummyProducts.append(dummyProduct)
         }
         return dummyProducts
