@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-class HeroesListViewModel: ObservableObject{
-    @Published private(set) var data: Result<[Hero], CommonError>? = .none
+class MarvelListViewModel: ObservableObject{
+    @Published private(set) var data: Result<[Marvel], CommonError>? = .none
     @Published private(set) var isPagingAvailable = false
     
     private var networkLayer: INetworkLayer
@@ -17,7 +17,7 @@ class HeroesListViewModel: ObservableObject{
     
     private var currentPage = 0
     private var pageLimit = 30
-    private var currentData = [Hero]()
+    private var currentData = [Marvel]()
     
     init(networkLayer: INetworkLayer) {
         self.networkLayer = networkLayer
@@ -29,12 +29,14 @@ class HeroesListViewModel: ObservableObject{
     }
     
     func loadNextPage() {
+        print("loadNextPage()")
         guard isPagingAvailable else { return }
+        print("go")
         self.subscribe(start: self.currentPage * self.pageLimit, number: self.pageLimit)
     }
 }
 
-extension HeroesListViewModel {
+extension MarvelListViewModel {
     
     private func subscribe(start: Int, number: Int) {
         networkLayer.getProducts(start: start, number: number)
@@ -48,11 +50,11 @@ extension HeroesListViewModel {
                     self?.data = .failure(.networkError)
                 }
             }, receiveValue: { [weak self] productsResponse in
-                self?.currentData += productsResponse.items.map{Hero.fromDTO(dto: $0)}
+                self?.currentData += productsResponse.data.results.map{Marvel.fromDTO(dto: $0)}
                 if let currentData = self?.currentData{
                     self?.data = .success(self?.currentData ?? [])
                     self?.currentPage += 1
-                    self?.isPagingAvailable = currentData.count < productsResponse.totalcount
+                    self?.isPagingAvailable = currentData.count < productsResponse.data.total
                 }
             })
             .store(in: &cancellables)

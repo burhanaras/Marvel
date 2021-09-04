@@ -8,23 +8,25 @@
 import Foundation
 import Combine
 
-class HeroesDetailViewModel: ObservableObject{
-    @Published private(set) var data: Result<Hero, CommonError>? = .none
+class MarvelDetailViewModel: ObservableObject{
+    @Published private(set) var data: Result<Marvel, CommonError>? = .none
     @Published private(set) var productImage: URL = URL(string: defaultImageURL)!
     
     private var networkLayer: INetworkLayer
     private var cancellables: Set<AnyCancellable> = []
-    private var productID: String
+    private var hero: Marvel
     
-    init(networkLayer: INetworkLayer, productId: String) {
+    init(networkLayer: INetworkLayer, hero: Marvel) {
         self.networkLayer = networkLayer
-        self.productID = productId
+        self.hero = hero
 
     }
     
     func loadProductDetail(){
-        subscribeToProductDetail(productId: productID)
-        subscribeToProductImage(productId: productID)
+//        subscribeToProductDetail(productId: productID)
+//        subscribeToProductImage(productId: productID)
+        
+        self.data = .success(hero)
     }
     
     private func subscribeToProductDetail(productId: String) {
@@ -39,7 +41,7 @@ class HeroesDetailViewModel: ObservableObject{
                     self?.data = .failure(.networkError)
                 }
             }, receiveValue: { [weak self] productDTO in
-                self?.data = .success(Hero.fromDTO(dto: productDTO))
+                self?.data = .success(Marvel.fromDTO(dto: productDTO))
             })
             .store(in: &cancellables)
     }

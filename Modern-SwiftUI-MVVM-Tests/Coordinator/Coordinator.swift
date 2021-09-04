@@ -12,8 +12,8 @@ final class Coordinator{
     
     public static let shared = Coordinator()
     
-    func navigateToProductDetail(productId: String) -> HeroesDetailView{
-        let viewModel = HeroesDetailViewModel(networkLayer: NetworkLayer(), productId: productId)
-        return HeroesDetailView(viewModel: viewModel)
+    func navigateToDetail(hero: Marvel) -> MarvelDetailView{
+        let viewModel = MarvelDetailViewModel(networkLayer: NetworkLayer(), hero: hero)
+        return MarvelDetailView(viewModel: viewModel)
     }
 }
