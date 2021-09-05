@@ -9,7 +9,7 @@ import Foundation
 
 class DummyData{
     
-   static func products() -> [Marvel]{
+   static func marvels() -> [Marvel]{
         var dummyProducts = [Marvel]()
         (0...20).forEach{ index in
             let dummyProduct = Marvel(id: UUID().uuidString, title: "Product \(index)", image: URL(string: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg")!, description: "The best")
@@ -18,7 +18,7 @@ class DummyData{
         return dummyProducts
     }
     
-    static func productDTOs(count: Int) -> [MarvelDTO]{
+    static func marvelDTOs(count: Int) -> [MarvelDTO]{
          var dummyProducts = [MarvelDTO]()
          (0..<count).forEach{ index in
             let id = Int.random(in: 0...1000)
@@ -31,7 +31,17 @@ class DummyData{
     static func productDTO(id: String) -> MarvelDTO {
         return MarvelDTO(id: Int(id)!, name: "Dummy Product with ID: \(id)", description: "\(Int.random(in: 1...25)).00 USD", thumbnail: ThumbnailDTO(path: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784", ext: "jpg"))
     }
-    static func hero() -> Marvel {
+    
+    static func marvel() -> Marvel {
         return Marvel(id: "123", title: "Iron Man", image: URL(string: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg")!, description: "I'm Iron Man")
+    }
+    
+    static func comicDTOs(count: Int) -> [ComicDTO] {
+        var data = [ComicDTO]()
+        (0..<count).forEach{ index in
+            let comicDTO = ComicDTO(id: index, title: "Comic \(index)", thumbnail: ThumbnailDTO(path: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784", ext: "jpg"))
+            data.append(comicDTO)
+        }
+        return data
     }
 }

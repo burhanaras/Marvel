@@ -36,6 +36,14 @@ struct MarvelDetailView: View {
             
             Text(hero.title) .font(.title)
             Text(hero.description).font(.body)
+            
+            ScrollView(.horizontal){
+                HStack{
+                    ForEach(viewModel.comics){ comics in
+                        Text(comics.title)
+                    }
+                }
+            }
             Spacer()
         }
         .padding()
@@ -46,13 +54,13 @@ struct ProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
         Group{
             // Successful
-            MarvelDetailView(viewModel: MarvelDetailViewModel(networkLayer: DummyNetworkLayer(), hero: DummyData.hero()))
-            MarvelDetailView(viewModel: MarvelDetailViewModel(networkLayer: DummyNetworkLayer(), hero: DummyData.hero()))
+            MarvelDetailView(viewModel: MarvelDetailViewModel(networkLayer: DummyNetworkLayer(), hero: DummyData.marvel()))
+            MarvelDetailView(viewModel: MarvelDetailViewModel(networkLayer: DummyNetworkLayer(), hero: DummyData.marvel()))
                 .colorScheme(.dark)
             
             // Failing
-            MarvelDetailView(viewModel: MarvelDetailViewModel(networkLayer: DummyFailingNetworkLayer(), hero: DummyData.hero()))
-            MarvelDetailView(viewModel: MarvelDetailViewModel(networkLayer: DummyFailingNetworkLayer(), hero: DummyData.hero()))
+            MarvelDetailView(viewModel: MarvelDetailViewModel(networkLayer: DummyFailingNetworkLayer(), hero: DummyData.marvel()))
+            MarvelDetailView(viewModel: MarvelDetailViewModel(networkLayer: DummyFailingNetworkLayer(), hero: DummyData.marvel()))
                 .colorScheme(.dark)
         }
     }

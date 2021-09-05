@@ -39,7 +39,7 @@ class MarvelListViewModel: ObservableObject{
 extension MarvelListViewModel {
     
     private func subscribe(start: Int, number: Int) {
-        networkLayer.getProducts(start: start, number: number)
+        networkLayer.getCharacters(start: start, number: number)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion{
                 case let .failure(error) where error == .malformedUrlError:

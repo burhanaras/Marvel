@@ -11,8 +11,8 @@ import CryptoKit
 
 protocol INetworkLayer {
     var baseURL: NSString { get }
-    func getProducts(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError>
-    func getProductDetail(productId: String) -> AnyPublisher<MarvelDTO, RequestError>
+    func getCharacters(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError>
+    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError>
     func getProductDetailImage(productId: String) -> AnyPublisher<ProductImagesResponse, RequestError>
 }
 
@@ -26,7 +26,7 @@ class NetworkLayer: INetworkLayer{
     var baseURL: NSString { return "https://api-sandbox.mysitoo.com/v2/accounts/90316/sites/1" as NSString }
     private let decoder = JSONDecoder()
     
-    func getProducts(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError> {
+    func getCharacters(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError> {
         let ts = Date().timeIntervalSince1970.description
         let hash = MD5(string: "\(ts)\(MarvelServiceConstants.privateApiKey)\(MarvelServiceConstants.publicApiKey)")
         let url = URL(string: "https://gateway.marvel.com:443/v1/public/characters?limit=\(number)&offset=\(start)&apikey=1674b346b944f391e5f9d632110f9948&hash=\(hash)&ts=\(ts)")
@@ -34,9 +34,12 @@ class NetworkLayer: INetworkLayer{
         return publisher.eraseToAnyPublisher()
     }
     
-    func getProductDetail(productId: String) -> AnyPublisher<MarvelDTO, RequestError> {
-        let url = URL(string: baseURL.appendingPathComponent("/products/\(productId).json"))
-        let publisher: AnyPublisher<MarvelDTO, RequestError> = fetch(url: url)
+    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError> {
+        let ts = Date().timeIntervalSince1970.description
+        let hash = MD5(string: "\(ts)\(MarvelServiceConstants.privateApiKey)\(MarvelServiceConstants.publicApiKey)")
+        let url = URL(string: "https://gateway.marvel.com:443/v1/public/characters/1017438/comics?dateRange=2013-01-01%2C2023-01-02&orderBy=onsaleDate&limit=10&apikey=1674b346b944f391e5f9d632110f9948&hash=\(hash)&ts=\(ts)")
+        
+        let publisher: AnyPublisher<ComicsResponse, RequestError> = fetch(url: url)
         return publisher.eraseToAnyPublisher()
     }
     
@@ -76,14 +79,14 @@ class NetworkLayer: INetworkLayer{
 class DummyNetworkLayer: INetworkLayer {
     var baseURL: NSString { return "https://api-sandbox.mysitoo.com/v2/accounts/90316/sites/1" as NSString }
     
-    func getProducts(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError> {
+    func getCharacters(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError> {
         return Result<CharactersResponse, RequestError>
-            .Publisher(.success(dummyProductsResponse))
+            .Publisher(.success(dummycharactersResponse))
             .eraseToAnyPublisher()
     }
-    func getProductDetail(productId: String) -> AnyPublisher<MarvelDTO, RequestError> {
-        return Result<MarvelDTO, RequestError>
-            .Publisher(.success(DummyData.productDTO(id: productId)))
+    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError> {
+        return Result<ComicsResponse, RequestError>
+            .Publisher(.success(dummyComicsResponse))
             .eraseToAnyPublisher()
     }
     
@@ -98,14 +101,14 @@ class DummyNetworkLayer: INetworkLayer {
 class DummyFailingNetworkLayer: INetworkLayer{
     var baseURL: NSString { return "https://api-sandbox.mysitoo.com/v2/accounts/90316/sites/1" as NSString }
     
-    func getProducts(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError> {
+    func getCharacters(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError> {
         return Result<CharactersResponse, RequestError>
             .Publisher(.failure(.networkError))
             .eraseToAnyPublisher()
     }
     
-    func getProductDetail(productId: String) -> AnyPublisher<MarvelDTO, RequestError> {
-        return Result<MarvelDTO, RequestError>
+    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError> {
+        return Result<ComicsResponse, RequestError>
             .Publisher(.failure(.networkError))
             .eraseToAnyPublisher()
     }
@@ -120,14 +123,14 @@ class DummyFailingNetworkLayer: INetworkLayer{
 class DummyFailingMalformedUrlNetworkLayer: INetworkLayer{
     var baseURL: NSString { return "https://api-sandbox.mysitoo.com/v2/accounts/90316/sites/1" as NSString }
     
-    func getProducts(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError> {
+    func getCharacters(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError> {
         return Result<CharactersResponse, RequestError>
             .Publisher(.failure(.malformedUrlError))
             .eraseToAnyPublisher()
     }
     
-    func getProductDetail(productId: String) -> AnyPublisher<MarvelDTO, RequestError> {
-        return Result<MarvelDTO, RequestError>
+    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError> {
+        return Result<ComicsResponse, RequestError>
             .Publisher(.failure(.malformedUrlError))
             .eraseToAnyPublisher()
     }
@@ -140,8 +143,9 @@ class DummyFailingMalformedUrlNetworkLayer: INetworkLayer{
 }
 
 
-var dummyProduct = Marvel(id: UUID().uuidString, title: "Slm", image: URL(string: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg")!, description: "The best")
-var dummyProductsResponse = CharactersResponse(code: 200, data: CharactersDataResponse(offset: 0, limit: 30, total: 151, results: DummyData.productDTOs(count: 30)))
+var dummyMarvel = Marvel(id: UUID().uuidString, title: "Slm", image: URL(string: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg")!, description: "The best")
+var dummycharactersResponse = CharactersResponse(code: 200, data: CharactersDataResponse(offset: 0, limit: 30, total: 151, results: DummyData.marvelDTOs(count: 30)))
+var dummyComicsResponse = ComicsResponse(code: 200, data: ComicsData(offset: 0, limit: 10, total: 10, results: DummyData.comicDTOs(count: 10)))
 
 func MD5(string: String) -> String {
     let digest = Insecure.MD5.hash(data: string.data(using: .utf8) ?? Data())
