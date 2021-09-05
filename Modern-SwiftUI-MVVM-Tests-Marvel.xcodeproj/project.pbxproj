@@ -10,6 +10,8 @@
 		9439C10A26E38BED00CAF7F5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9439C10926E38BED00CAF7F5 /* Kingfisher */; };
 		9439C10C26E4F11D00CAF7F5 /* Comics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439C10B26E4F11D00CAF7F5 /* Comics.swift */; };
 		9439C10D26E4F11D00CAF7F5 /* Comics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439C10B26E4F11D00CAF7F5 /* Comics.swift */; };
+		9439C10F26E506CB00CAF7F5 /* NetworkLayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439C10E26E506CB00CAF7F5 /* NetworkLayer+Extension.swift */; };
+		9439C11026E506CB00CAF7F5 /* NetworkLayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439C10E26E506CB00CAF7F5 /* NetworkLayer+Extension.swift */; };
 		9452B98C26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B98B26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift */; };
 		9452B99026DA5C2400135744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9452B98F26DA5C2400135744 /* Assets.xcassets */; };
 		9452B99326DA5C2400135744 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9452B99226DA5C2400135744 /* Preview Assets.xcassets */; };
@@ -53,6 +55,7 @@
 
 /* Begin PBXFileReference section */
 		9439C10B26E4F11D00CAF7F5 /* Comics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comics.swift; sourceTree = "<group>"; };
+		9439C10E26E506CB00CAF7F5 /* NetworkLayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkLayer+Extension.swift"; sourceTree = "<group>"; };
 		9452B98826DA5C2300135744 /* Modern-SwiftUI-MVVM-Tests-Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Modern-SwiftUI-MVVM-Tests-Marvel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9452B98B26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modern_SwiftUI_MVVM_TestsApp.swift; sourceTree = "<group>"; };
 		9452B98F26DA5C2400135744 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 				9452B9B726DAC4B300135744 /* NetworkLayer.swift */,
 				9452B9DF26DD65D500135744 /* Error Handling */,
 				9452B9DE26DD65C600135744 /* Dummy Data */,
+				9439C10E26E506CB00CAF7F5 /* NetworkLayer+Extension.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -394,6 +398,7 @@
 				9452B9AB26DA696400135744 /* ErrorView.swift in Sources */,
 				9452B9B326DA762B00135744 /* Coordinator.swift in Sources */,
 				9452B9AD26DA6A6400135744 /* LoadingView.swift in Sources */,
+				9439C10F26E506CB00CAF7F5 /* NetworkLayer+Extension.swift in Sources */,
 				9452B9A326DA609700135744 /* MarvelListViewModel.swift in Sources */,
 				9452B98C26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift in Sources */,
 				9452B9D126DD60EF00135744 /* AsyncImage.swift in Sources */,
@@ -415,6 +420,7 @@
 				9452B9C926DAEFDF00135744 /* CommonError.swift in Sources */,
 				9452B9E226DD6FDC00135744 /* ComicsResponse.swift in Sources */,
 				9452B9E326DD6FE000135744 /* CharactersResponse.swift in Sources */,
+				9439C11026E506CB00CAF7F5 /* NetworkLayer+Extension.swift in Sources */,
 				9452B9CC26DAEFE900135744 /* Marvel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

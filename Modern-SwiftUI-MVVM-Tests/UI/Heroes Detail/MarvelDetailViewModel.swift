@@ -33,12 +33,13 @@ class MarvelDetailViewModel: ObservableObject{
             .sink(receiveCompletion: {[weak self] completion in
                 switch completion{
                 case let .failure(error) where error == .malformedUrlError:
-                    self?.data = .failure(.configurationError)
+                    self?.comics = [Comics]()
+                    self?.isComicsLoading = false
                 case .finished:
                     self?.isComicsLoading = false
                     break
                 default:
-                    self?.data = .failure(.networkError)
+                    self?.comics = [Comics]()
                 }
             }, receiveValue: { [weak self] comicsResponse in
                 self?.comics = comicsResponse.data.results.map { Comics.fromDTO(dto: $0)}

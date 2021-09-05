@@ -7,6 +7,12 @@
 
 import Foundation
 
+
+var dummyMarvel = Marvel(id: UUID().uuidString, title: "Slm", image: URL(string: "https://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg")!, description: "The best")
+var dummyCharactersResponse = CharactersResponse(code: 200, data: CharactersDataResponse(offset: 0, limit: 30, total: 151, results: DummyData.marvelDTOs(count: 30)))
+var dummyComicsResponse = ComicsResponse(code: 200, data: ComicsData(offset: 0, limit: 10, total: 10, results: DummyData.comicDTOs(count: 10)))
+
+
 class DummyData{
     
    static func marvels() -> [Marvel]{
