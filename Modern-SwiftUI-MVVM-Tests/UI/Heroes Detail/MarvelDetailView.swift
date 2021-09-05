@@ -29,8 +29,7 @@ struct MarvelDetailView: View {
     func heroesDetail(_ hero: Marvel) -> some View{
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
-                KFImage( hero.image)
-                    .resizable()
+                NetworkImage(imageURL: hero.image)
                     .frame(width: 180, height: 180, alignment: .center)
                     .cornerRadius(8)
                     .padding()
@@ -79,13 +78,13 @@ struct ComicsView: View{
     let comics: Comics
     var body: some View{
         VStack (alignment: .center, spacing: 4) {
-            KFImage( comics.image)
-                .resizable()
+            NetworkImage( imageURL: comics.image)
                 .frame(width: 120, height: 120, alignment: .center)
                 .cornerRadius(8)
             Text(comics.title)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
+            Spacer()
         }
         .frame(width: 120, height: 180, alignment: .center)
         .padding(4)

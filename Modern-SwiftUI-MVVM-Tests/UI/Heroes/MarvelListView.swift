@@ -65,8 +65,7 @@ struct MarvelRowView: View{
             destination: Coordinator.shared.navigateToDetail(hero: hero),
             label: {
                 ZStack(alignment: .center){
-                    KFImage( hero.image)
-                        .resizable()
+                    NetworkImage(imageURL: hero.image)
                         .aspectRatio(1.0, contentMode: .fit)
                         .clipped()
                     

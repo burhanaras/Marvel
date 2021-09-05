@@ -13,6 +13,7 @@
 		9439C10F26E506CB00CAF7F5 /* NetworkLayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439C10E26E506CB00CAF7F5 /* NetworkLayer+Extension.swift */; };
 		9439C11026E506CB00CAF7F5 /* NetworkLayer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439C10E26E506CB00CAF7F5 /* NetworkLayer+Extension.swift */; };
 		9439C11226E53AE000CAF7F5 /* MarvelAPI-Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9439C11126E53ADF00CAF7F5 /* MarvelAPI-Keys.plist */; };
+		9439C11426E540D200CAF7F5 /* NetworkImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9439C11326E540D200CAF7F5 /* NetworkImage.swift */; };
 		9452B98C26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9452B98B26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift */; };
 		9452B99026DA5C2400135744 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9452B98F26DA5C2400135744 /* Assets.xcassets */; };
 		9452B99326DA5C2400135744 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9452B99226DA5C2400135744 /* Preview Assets.xcassets */; };
@@ -54,6 +55,7 @@
 		9439C10B26E4F11D00CAF7F5 /* Comics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comics.swift; sourceTree = "<group>"; };
 		9439C10E26E506CB00CAF7F5 /* NetworkLayer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkLayer+Extension.swift"; sourceTree = "<group>"; };
 		9439C11126E53ADF00CAF7F5 /* MarvelAPI-Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MarvelAPI-Keys.plist"; sourceTree = "<group>"; };
+		9439C11326E540D200CAF7F5 /* NetworkImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkImage.swift; sourceTree = "<group>"; };
 		9452B98826DA5C2300135744 /* Modern-SwiftUI-MVVM-Tests-Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Modern-SwiftUI-MVVM-Tests-Marvel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9452B98B26DA5C2300135744 /* Modern_SwiftUI_MVVM_TestsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modern_SwiftUI_MVVM_TestsApp.swift; sourceTree = "<group>"; };
 		9452B98F26DA5C2400135744 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				9452B9AA26DA696400135744 /* ErrorView.swift */,
 				9452B9AC26DA6A6400135744 /* LoadingView.swift */,
+				9439C11326E540D200CAF7F5 /* NetworkImage.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				9452B9A126DA608200135744 /* MarvelListView.swift in Sources */,
 				9452B9D926DD652400135744 /* ComicsResponse.swift in Sources */,
 				9452B9A826DA637700135744 /* CommonError.swift in Sources */,
+				9439C11426E540D200CAF7F5 /* NetworkImage.swift in Sources */,
 				9452B9B126DA714000135744 /* MarvelDetailViewModel.swift in Sources */,
 				9452B9A626DA612900135744 /* Marvel.swift in Sources */,
 				9452B9AB26DA696400135744 /* ErrorView.swift in Sources */,
