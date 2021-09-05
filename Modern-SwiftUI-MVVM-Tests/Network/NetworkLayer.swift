@@ -12,7 +12,7 @@ import CryptoKit
 protocol INetworkLayer {
     var baseURL: NSString { get }
     func getCharacters(start: Int, number: Int) -> AnyPublisher<CharactersResponse, RequestError>
-    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError>
+    func getComicsOf(characterId: String) -> AnyPublisher<ComicsResponse, RequestError>
     func getProductDetailImage(productId: String) -> AnyPublisher<ProductImagesResponse, RequestError>
 }
 
@@ -34,10 +34,10 @@ class NetworkLayer: INetworkLayer{
         return publisher.eraseToAnyPublisher()
     }
     
-    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError> {
+    func getComicsOf(characterId: String) -> AnyPublisher<ComicsResponse, RequestError> {
         let ts = Date().timeIntervalSince1970.description
         let hash = MD5(string: "\(ts)\(MarvelServiceConstants.privateApiKey)\(MarvelServiceConstants.publicApiKey)")
-        let url = URL(string: "https://gateway.marvel.com:443/v1/public/characters/1017438/comics?dateRange=2013-01-01%2C2023-01-02&orderBy=onsaleDate&limit=10&apikey=1674b346b944f391e5f9d632110f9948&hash=\(hash)&ts=\(ts)")
+        let url = URL(string: "https://gateway.marvel.com:443/v1/public/characters/\(characterId)/comics?dateRange=2005-01-01%2C2023-01-02&orderBy=onsaleDate&limit=10&apikey=1674b346b944f391e5f9d632110f9948&hash=\(hash)&ts=\(ts)")
         
         let publisher: AnyPublisher<ComicsResponse, RequestError> = fetch(url: url)
         return publisher.eraseToAnyPublisher()
@@ -84,7 +84,7 @@ class DummyNetworkLayer: INetworkLayer {
             .Publisher(.success(dummycharactersResponse))
             .eraseToAnyPublisher()
     }
-    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError> {
+    func getComicsOf(characterId: String) -> AnyPublisher<ComicsResponse, RequestError> {
         return Result<ComicsResponse, RequestError>
             .Publisher(.success(dummyComicsResponse))
             .eraseToAnyPublisher()
@@ -107,7 +107,7 @@ class DummyFailingNetworkLayer: INetworkLayer{
             .eraseToAnyPublisher()
     }
     
-    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError> {
+    func getComicsOf(characterId: String) -> AnyPublisher<ComicsResponse, RequestError> {
         return Result<ComicsResponse, RequestError>
             .Publisher(.failure(.networkError))
             .eraseToAnyPublisher()
@@ -129,7 +129,7 @@ class DummyFailingMalformedUrlNetworkLayer: INetworkLayer{
             .eraseToAnyPublisher()
     }
     
-    func getComicsOf(productId: String) -> AnyPublisher<ComicsResponse, RequestError> {
+    func getComicsOf(characterId: String) -> AnyPublisher<ComicsResponse, RequestError> {
         return Result<ComicsResponse, RequestError>
             .Publisher(.failure(.malformedUrlError))
             .eraseToAnyPublisher()

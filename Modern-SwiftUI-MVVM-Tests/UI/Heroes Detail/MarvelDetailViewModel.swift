@@ -11,31 +11,31 @@ import Combine
 class MarvelDetailViewModel: ObservableObject{
     @Published private(set) var data: Result<Marvel, CommonError>? = .none
     @Published private(set) var comics: [Comics] = [Comics]()
+    @Published private(set) var isComicsLoading: Bool = false
     
     private var networkLayer: INetworkLayer
     private var cancellables: Set<AnyCancellable> = []
-    private var hero: Marvel
+    private var marvel: Marvel
     
-    init(networkLayer: INetworkLayer, hero: Marvel) {
+    init(networkLayer: INetworkLayer, marvel: Marvel) {
         self.networkLayer = networkLayer
-        self.hero = hero
-
+        self.marvel = marvel
     }
     
     func loadProductDetail(){
-        subscribeToProductDetail(characterId: hero.id)
-//        subscribeToProductImage(productId: productID)
-        
-        self.data = .success(hero)
+        subscribeToProductDetail(characterId: marvel.id)
+        self.data = .success(marvel)
     }
     
     private func subscribeToProductDetail(characterId: String) {
-        networkLayer.getComicsOf(productId: characterId)
+        self.isComicsLoading = true
+        networkLayer.getComicsOf(characterId: characterId)
             .sink(receiveCompletion: {[weak self] completion in
                 switch completion{
                 case let .failure(error) where error == .malformedUrlError:
                     self?.data = .failure(.configurationError)
                 case .finished:
+                    self?.isComicsLoading = false
                     break
                 default:
                     self?.data = .failure(.networkError)
@@ -48,4 +48,3 @@ class MarvelDetailViewModel: ObservableObject{
     
 }
 
-var defaultImageURL = "https://via.placeholder.com/300.png"
