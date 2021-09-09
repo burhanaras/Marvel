@@ -76,8 +76,8 @@ struct MarvelRowView: View{
                             .frame(minWidth: 0, maxWidth: .infinity)
                             .multilineTextAlignment(.center)
                             .lineLimit(2)
-                            .padding(4)
-                            .background(Color.gray.opacity(0.8))
+                            .padding()
+                            .background(Rectangle().foregroundColor(Color.black).opacity(0.4).blur(radius: 2.5))
                             .foregroundColor(.white)
                     }
 
