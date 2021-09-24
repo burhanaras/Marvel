@@ -20,11 +20,11 @@ class MarvelDetailViewModel: ObservableObject{
     init(networkLayer: INetworkLayer, marvel: Marvel) {
         self.networkLayer = networkLayer
         self.marvel = marvel
+        self.data = .success(marvel)
     }
     
     func loadProductDetail(){
         subscribeToProductDetail(characterId: marvel.id)
-        self.data = .success(marvel)
     }
     
     private func subscribeToProductDetail(characterId: String) {

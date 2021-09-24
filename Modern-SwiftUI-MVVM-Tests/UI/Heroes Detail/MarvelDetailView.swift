@@ -14,7 +14,8 @@ struct MarvelDetailView: View {
     var body: some View {
         VStack {
             switch viewModel.data{
-            case let .success(marvel): heroesDetail(marvel)
+            case let .success(marvel):
+                MarvelDetail(viewModel: viewModel, hero: marvel)
             case let .failure(error):
                 ErrorView(error: error)
             case .none:
@@ -25,8 +26,13 @@ struct MarvelDetailView: View {
             viewModel.loadProductDetail()
         }
     }
+}
+
+struct MarvelDetail: View {
+    @ObservedObject var viewModel: MarvelDetailViewModel
+    let hero: Marvel
     
-    func heroesDetail(_ hero: Marvel) -> some View{
+    var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack {
                 NetworkImage(imageURL: hero.image)
@@ -51,6 +57,7 @@ struct MarvelDetailView: View {
 }
 
 struct ComicsShelf: View {
+    
     let comics: [Comics]
     var body: some View{
         HStack {
